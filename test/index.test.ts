@@ -371,7 +371,7 @@ describe('Static Plugin', () => {
     })
 
     it('should 404 when navigate to folder', async () => {
-        const app = new Elysia().use(staticPlugin())
+        const app = new Elysia().use(staticPlugin({ indexHTML: false }))
 
         await app.modules
 
@@ -394,7 +394,7 @@ describe('Static Plugin', () => {
         await app.modules
 
         let res = await app.handle(req('/public'))
-        expect(res.status).toBe(404)
+        expect(res.status).toBe(200)
 
         res = await app.handle(req('/public/html'))
         expect(res.status).toBe(200)
